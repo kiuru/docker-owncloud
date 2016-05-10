@@ -1,0 +1,39 @@
+nginx:
+  image: jwilder/nginx-proxy:latest
+  restart: always
+  environment:
+    - VIRTUAL_PROTO=http
+    - TZ=Europe/Helsinki
+  ports:
+#    - 443:443
+    - 80:80
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+    - ./nginx/certs:/etc/nginx/certs:ro
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+owncloud:
+  image: owncloud:9.0.1
+  restart: always
+  links:
+    - postgres
+  environment:
+    - VIRTUAL_HOST=localhost
+    - TARGET_SUBDIR=/
+    - START_MYSQL=false
+    - TZ=Europe/Helsinki
+  volumes:
+    - ./owncloud/volumes/data:/var/www/html/data
+    - ./owncloud/volumes/config:/var/www/html/config
+    - ./owncloud/php.ini:/usr/local/etc/php/php.ini:ro
+
+postgres:
+  image: postgres:9.3.12
+  restart: always
+  environment:
+    - TZ=Europe/Helsinki
+  extends:
+    file: ./postgres/secrets.yml
+    service: postgres
+  volumes:
+    - ./postgres/volumes/var/lib/postgresql/data:/var/lib/postgresql/data
