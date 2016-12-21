@@ -13,7 +13,7 @@ nginx:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
 owncloud:
-  image: owncloud:9.0.1
+  image: owncloud:9.1
   restart: always
   links:
     - postgres
