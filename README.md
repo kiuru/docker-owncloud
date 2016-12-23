@@ -20,7 +20,7 @@ Set your posgresql password to postgres/secrets.yml. Default username is postgre
 
 The default maximum file size for uploads is 512MB.
 
-You can increase maximum file size e.g. with follow commands:
+You can increase maximum file size e.g. with following commands:
 
 	$ sudo docker exec --user www-data -i -t dockerowncloud_owncloud_1 /bin/bash
 	$ sed -i -- 's/513M/2G/g' .htaccess
