@@ -34,7 +34,6 @@ or listen php.ini and nginx:
 Notice that those options are not persistence! It effects only for running container, so when you upgrade or remove it all changes has gone.
 
 # TODO
-- HTTPS support
 - Collect containers logs
 
 Thanks for https://github.com/tkock/owncloud-docker-compose
