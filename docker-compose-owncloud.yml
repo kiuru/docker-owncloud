@@ -1,11 +1,11 @@
 nginx:
-  image: jwilder/nginx-proxy:latest
+  image: jwilder/nginx-proxy:0.5.0
   restart: always
   environment:
-    - VIRTUAL_PROTO=http
+    - VIRTUAL_PROTO=https
     - TZ=Europe/Helsinki
   ports:
-#    - 443:443
+    - 443:443
     - 80:80
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
@@ -13,7 +13,7 @@ nginx:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
 owncloud:
-  image: owncloud:9.1
+  image: owncloud:10.0
   restart: always
   links:
     - postgres
@@ -28,7 +28,7 @@ owncloud:
     - ./owncloud/php.ini:/usr/local/etc/php/php.ini:ro
 
 postgres:
-  image: postgres:9.3.12
+  image: postgres:9.3
   restart: always
   environment:
     - TZ=Europe/Helsinki
